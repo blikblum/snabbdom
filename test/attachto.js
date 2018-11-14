@@ -13,9 +13,9 @@ describe('attachTo', function() {
   });
   it('adds element to target', function() {
     var vnode1 = h('div', [
-       h('div#wrapper', [
+       h('div-wrapper', [
          h('div', 'Some element'),
-         attachTo(elm, h('div#attached', 'Test')),
+         attachTo(elm, h('div-attached', 'Test')),
        ]),
     ]);
     elm = patch(vnode0, vnode1).elm;
@@ -23,15 +23,15 @@ describe('attachTo', function() {
   });
   it('updates element at target', function() {
     var vnode1 = h('div', [
-      h('div#wrapper', [
+      h('div-wrapper', [
         h('div', 'Some element'),
-        attachTo(elm, h('div#attached', 'First text')),
+        attachTo(elm, h('div-attached', 'First text')),
       ]),
     ]);
     var vnode2 = h('div', [
-      h('div#wrapper', [
+      h('div-wrapper', [
         h('div', 'Some element'),
-        attachTo(elm, h('div#attached', 'New text')),
+        attachTo(elm, h('div-attached', 'New text')),
       ]),
     ]);
     elm = patch(vnode0, vnode1).elm;
@@ -41,16 +41,16 @@ describe('attachTo', function() {
   });
   it('element can be inserted before modal', function() {
     var vnode1 = h('div', [
-      h('div#wrapper', [
+      h('div-wrapper', [
         h('div', 'Some element'),
-        attachTo(elm, h('div#attached', 'Text')),
+        attachTo(elm, h('div-attached', 'Text')),
       ]),
     ]);
     var vnode2 = h('div', [
-      h('div#wrapper', [
+      h('div-wrapper', [
         h('div', 'Some element'),
         h('div', 'A new element'),
-        attachTo(elm, h('div#attached', 'Text')),
+        attachTo(elm, h('div-attached', 'Text')),
       ]),
     ]);
     elm = patch(vnode0, vnode1).elm;
@@ -60,13 +60,13 @@ describe('attachTo', function() {
   });
   it('removes element at target', function() {
     var vnode1 = h('div', [
-      h('div#wrapper', [
+      h('div-wrapper', [
         h('div', 'Some element'),
-        attachTo(elm, h('div#attached', 'First text')),
+        attachTo(elm, h('div-attached', 'First text')),
       ]),
     ]);
     var vnode2 = h('div', [
-      h('div#wrapper', [
+      h('div-wrapper', [
         h('div', 'Some element'),
       ]),
     ]);
@@ -77,18 +77,18 @@ describe('attachTo', function() {
   });
   it('remove hook receives real element', function() {
     function rm(vnode, cb) {
-      assert.equal(vnode.elm.tagName, 'DIV');
+      assert.equal(vnode.elm.tagName, 'DIV-ATTACHED');
       assert.equal(vnode.elm.innerHTML, 'First text');
       cb();
     }
     var vnode1 = h('div', [
-      h('div#wrapper', [
+      h('div-wrapper', [
         h('div', 'Some element'),
-        attachTo(elm, h('div#attached', {hook: {remove: rm}}, 'First text')),
+        attachTo(elm, h('div-attached', {hook: {remove: rm}}, 'First text')),
       ]),
     ]);
     var vnode2 = h('div', [
-      h('div#wrapper', [
+      h('div-wrapper', [
         h('div', 'Some element'),
       ]),
     ]);
